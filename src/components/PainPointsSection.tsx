@@ -1,139 +1,141 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
+import painPointsModel from '@/assets/pain-points-model.png';
 
 interface PainPointsSectionProps {
   onSelectPainArea: (area: string) => void;
 }
 
 const painPoints = [
-  { id: 'neck', label: 'Neck', x: 50, y: 8 },
-  { id: 'left-shoulder', label: 'Left Shoulder', x: 32, y: 15 },
-  { id: 'right-shoulder', label: 'Right Shoulder', x: 68, y: 15 },
-  { id: 'upper-back', label: 'Upper Back', x: 50, y: 22 },
-  { id: 'lower-back', label: 'Lower Back', x: 50, y: 38 },
-  { id: 'left-hip', label: 'Left Hip', x: 38, y: 48 },
-  { id: 'right-hip', label: 'Right Hip', x: 62, y: 48 },
-  { id: 'left-knee', label: 'Left Knee', x: 40, y: 68 },
-  { id: 'right-knee', label: 'Right Knee', x: 60, y: 68 },
-  { id: 'left-ankle', label: 'Left Ankle', x: 40, y: 90 },
-  { id: 'right-ankle', label: 'Right Ankle', x: 60, y: 90 },
+  { 
+    id: 'neck', 
+    label: 'Neck', 
+    description: 'Overcome cervical pain, chronic stiffness, and tension headaches.',
+    position: { top: '12%', left: '45%' }
+  },
+  { 
+    id: 'shoulder', 
+    label: 'Shoulder', 
+    description: 'Relief from frozen shoulder, rotator cuff injuries, and posture issues.',
+    position: { top: '22%', left: '35%' }
+  },
+  { 
+    id: 'lower-back', 
+    label: 'Lower Back', 
+    description: 'Address sciatica, disc problems, and chronic lower back pain.',
+    position: { top: '42%', left: '42%' }
+  },
+  { 
+    id: 'hip', 
+    label: 'Hip', 
+    description: 'Treatment for hip arthritis, bursitis, and mobility restrictions.',
+    position: { top: '52%', left: '38%' }
+  },
+  { 
+    id: 'knee', 
+    label: 'Knee', 
+    description: 'Recovery from ACL injuries, arthritis, and post-surgery rehabilitation.',
+    position: { top: '72%', left: '42%' }
+  },
+  { 
+    id: 'ankle', 
+    label: 'Ankle', 
+    description: 'Heal sprains, plantar fasciitis, and Achilles tendon issues.',
+    position: { top: '92%', left: '44%' }
+  },
 ];
 
 const PainPointsSection = ({ onSelectPainArea }: PainPointsSectionProps) => {
-  const [hoveredPoint, setHoveredPoint] = useState<string | null>(null);
-
   return (
-    <section className="section-padding bg-gradient-to-b from-background to-secondary/30">
+    <section className="section-padding bg-gradient-to-b from-background to-secondary/30 overflow-hidden">
       <div className="container-padding max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-12 lg:mb-16"
         >
           <h2 className="heading-display text-3xl sm:text-4xl lg:text-5xl text-foreground mb-4">
-            Where does it <span className="gradient-text">hurt?</span>
+            From Aches to Chronic Pain
           </h2>
-          <p className="text-muted-foreground text-lg max-w-md mx-auto">
-            Click on the area that's causing you discomfort
+          <p className="gradient-text text-2xl sm:text-3xl lg:text-4xl font-display font-medium">
+            We've Got You Covered
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex justify-center"
-        >
-          <div className="relative w-full max-w-xs aspect-[1/2.2]">
-            {/* Human body silhouette - SVG */}
-            <svg
-              viewBox="0 0 100 220"
-              className="w-full h-full"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {/* Head */}
-              <ellipse cx="50" cy="12" rx="12" ry="12" className="fill-primary/10 stroke-primary/30" strokeWidth="0.5" />
-              
-              {/* Neck */}
-              <rect x="46" y="24" width="8" height="8" rx="2" className="fill-primary/10" />
-              
-              {/* Torso */}
-              <path
-                d="M30 35 Q25 40 25 60 L25 95 Q25 100 30 105 L40 110 L50 115 L60 110 L70 105 Q75 100 75 95 L75 60 Q75 40 70 35 L60 32 L50 30 L40 32 Z"
-                className="fill-primary/10 stroke-primary/30"
-                strokeWidth="0.5"
+        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8 lg:gap-0">
+          {/* Human Image with Pain Points */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative w-full max-w-sm lg:max-w-md xl:max-w-lg"
+          >
+            <div className="relative">
+              <img 
+                src={painPointsModel} 
+                alt="Body pain points illustration" 
+                className="w-full h-auto object-contain"
               />
               
-              {/* Left Arm */}
-              <path
-                d="M25 40 Q15 45 12 70 Q10 85 15 100"
-                className="stroke-primary/30 fill-none"
-                strokeWidth="6"
-                strokeLinecap="round"
-              />
-              
-              {/* Right Arm */}
-              <path
-                d="M75 40 Q85 45 88 70 Q90 85 85 100"
-                className="stroke-primary/30 fill-none"
-                strokeWidth="6"
-                strokeLinecap="round"
-              />
-              
-              {/* Left Leg */}
-              <path
-                d="M40 110 Q38 130 40 150 Q40 175 38 200"
-                className="stroke-primary/30 fill-none"
-                strokeWidth="8"
-                strokeLinecap="round"
-              />
-              
-              {/* Right Leg */}
-              <path
-                d="M60 110 Q62 130 60 150 Q60 175 62 200"
-                className="stroke-primary/30 fill-none"
-                strokeWidth="8"
-                strokeLinecap="round"
-              />
-            </svg>
+              {/* Pain point markers on the image */}
+              {painPoints.map((point, index) => (
+                <motion.button
+                  key={point.id}
+                  onClick={() => onSelectPainArea(point.label)}
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 + index * 0.1, type: 'spring', stiffness: 300 }}
+                  whileHover={{ scale: 1.3 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="absolute transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
+                  style={{ top: point.position.top, left: point.position.left }}
+                  aria-label={`Select ${point.label} pain area`}
+                >
+                  {/* Pulsing ring */}
+                  <span className="absolute inset-0 rounded-full bg-primary/40 animate-ping" />
+                  
+                  {/* Core dot - light blue from brand */}
+                  <span className="relative block w-4 h-4 rounded-full bg-primary shadow-lg border-2 border-white" />
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
 
-            {/* Pain points */}
-            {painPoints.map((point) => (
+          {/* Pain Points Content List */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col gap-6 lg:gap-8 lg:pl-8 xl:pl-16 w-full max-w-md"
+          >
+            {painPoints.map((point, index) => (
               <motion.button
                 key={point.id}
                 onClick={() => onSelectPainArea(point.label)}
-                onMouseEnter={() => setHoveredPoint(point.id)}
-                onMouseLeave={() => setHoveredPoint(null)}
-                className="absolute transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
-                style={{ left: `${point.x}%`, top: `${point.y}%` }}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 + index * 0.1 }}
+                whileHover={{ x: 8 }}
+                className="text-left group cursor-pointer"
               >
-                {/* Pulsing ring */}
-                <span className="absolute inset-0 rounded-full bg-destructive/30 pain-point-pulse" />
-                
-                {/* Core dot */}
-                <span className="relative block w-4 h-4 rounded-full bg-destructive shadow-lg border-2 border-background" />
-                
-                {/* Tooltip */}
-                {hoveredPoint === point.id && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="absolute left-1/2 -translate-x-1/2 -top-10 whitespace-nowrap glass-card px-3 py-1.5 text-sm font-medium z-10"
-                  >
-                    {point.label}
-                    <span className="block text-xs text-primary mt-0.5">Yes, we help with this</span>
-                  </motion.div>
-                )}
+                <h3 className="text-xl sm:text-2xl font-display font-semibold text-primary mb-1 group-hover:text-primary-foreground transition-colors">
+                  {point.label}
+                </h3>
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                  {point.description}{' '}
+                  <span className="text-primary font-medium group-hover:underline">
+                    Know more
+                  </span>
+                </p>
               </motion.button>
             ))}
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
