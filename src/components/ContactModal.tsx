@@ -94,9 +94,9 @@ const ContactModal = ({ isOpen, onClose, preselectedPainArea }: ContactModalProp
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md z-50 container-padding"
+            className="fixed inset-0 flex items-center justify-center z-50 p-4 sm:p-6"
           >
-            <div className="glass-card p-6 sm:p-8 relative">
+            <div className="glass-card p-8 sm:p-10 relative w-full max-w-lg mx-auto">
               <button
                 onClick={onClose}
                 className="absolute top-4 right-4 p-2 text-muted-foreground hover:text-foreground transition-colors"
