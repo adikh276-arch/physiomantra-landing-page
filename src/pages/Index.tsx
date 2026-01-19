@@ -1,12 +1,45 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import Navigation from '@/components/Navigation';
+import HeroSection from '@/components/HeroSection';
+import PainPointsSection from '@/components/PainPointsSection';
+import WhyPhysioMantraSection from '@/components/WhyPhysioMantraSection';
+import HowItWorksSection from '@/components/HowItWorksSection';
+import CoverageSection from '@/components/CoverageSection';
+import PricingSection from '@/components/PricingSection';
+import FinalCTASection from '@/components/FinalCTASection';
+import Footer from '@/components/Footer';
+import ContactModal from '@/components/ContactModal';
 
 const Index = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPainArea, setSelectedPainArea] = useState<string | undefined>();
+
+  const handleOpenModal = () => {
+    setSelectedPainArea(undefined);
+    setIsModalOpen(true);
+  };
+
+  const handlePainAreaSelect = (area: string) => {
+    setSelectedPainArea(area);
+    setIsModalOpen(true);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Navigation onOpenModal={handleOpenModal} />
+      <HeroSection onOpenModal={handleOpenModal} />
+      <PainPointsSection onSelectPainArea={handlePainAreaSelect} />
+      <WhyPhysioMantraSection />
+      <HowItWorksSection />
+      <CoverageSection />
+      <PricingSection onOpenModal={handleOpenModal} />
+      <FinalCTASection onOpenModal={handleOpenModal} />
+      <Footer />
+      <ContactModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        preselectedPainArea={selectedPainArea}
+      />
     </div>
   );
 };
